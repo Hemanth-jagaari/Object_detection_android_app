@@ -21,6 +21,7 @@ import android.graphics.RectF;
 import android.graphics.YuvImage;
 import android.media.Image;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Size;
 
@@ -31,6 +32,7 @@ import org.tensorflow.lite.support.image.TensorImage;
 import org.tensorflow.lite.task.vision.detector.Detection;
 import org.tensorflow.lite.task.vision.detector.ObjectDetector;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -94,6 +96,7 @@ public class MainActivity2 extends AppCompatActivity {
             public void analyze(@NonNull ImageProxy image) {
                 @SuppressLint("UnsafeOptInUsageError") Image mediaImage = image.getImage();
                 int rotation=image.getImageInfo().getRotationDegrees();
+
                 Bitmap bitmap=toBitmap(mediaImage);
                 bitmap=rotateBitmap(bitmap,rotation);
 
@@ -104,11 +107,10 @@ public class MainActivity2 extends AppCompatActivity {
                     if(binding.parent.getChildCount()>1) binding.parent.removeViewAt(1);
                     RectF rect = res.getBoundingBox();
                     String label=res.getCategories().get(0).getLabel();
-                    if(label==null){
-                        label="undefined";
-                    }
+
                     Log.d("Label:",label);
-                    Draw element=new Draw(MainActivity2.this,rect,label);
+
+                    Draw element=new Draw(MainActivity2.this,rect,TextUtils.isEmpty(label)?"undefined":label);
 
                     binding.parent.addView(element);
                 }
@@ -191,5 +193,12 @@ public class MainActivity2 extends AppCompatActivity {
         Matrix matrix = new Matrix();
         matrix.postRotate(rotation);
         return Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
+
+    }
+    public Bitmap ByteArrayToBitmap(byte[] byteArray)
+    {
+        ByteArrayInputStream arrayInputStream = new ByteArrayInputStream(byteArray);
+        Bitmap bitmap = BitmapFactory.decodeStream(arrayInputStream);
+        return bitmap;
     }
 }

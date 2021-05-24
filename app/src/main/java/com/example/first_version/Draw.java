@@ -22,9 +22,9 @@ public class Draw extends View {
         super((Context) context);
         paint=new Paint();
         this.rect=rect;
-        this.text=text;
+        this.text=label;
         paint.setColor(Color.RED);
-        paint.setStrokeWidth(20f);
+        paint.setStrokeWidth(10f);
         paint.setStyle(Paint.Style.STROKE);
         textpaint=new Paint();
         textpaint.setColor(Color.RED);
@@ -35,7 +35,7 @@ public class Draw extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //canvas.drawText(text,rect.centerX(),rect.centerY(),textpaint);
+        canvas.drawText(text,rect.centerX(),rect.centerY(),textpaint);
         canvas.drawRect(rect.left,rect.top,rect.right,rect.bottom,paint);
     }
 }
