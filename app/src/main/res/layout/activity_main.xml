@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -12,11 +13,12 @@
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
+            android:layout_marginTop="40dp"
             android:layout_height="40dp"
             android:id="@+id/container"
-            android:textSize="20sp"
+            android:textSize="25sp"
             android:layout_gravity="center"
-            android:text="This is a CameraX test app!"
+            android:text="Real Time Object Detection !"
             android:gravity="center">
         </TextView>
         <ImageView
@@ -26,9 +28,9 @@
             tools:srcCompat="@tools:sample/avatars" />
         <TextView
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="60dp"
         android:id="@+id/textview"
-        android:textSize="15sp"
+        android:textSize="20sp"
         android:layout_gravity="center"
         android:text="Labels:"
         android:gravity="center">
@@ -37,7 +39,7 @@
         <Button
             android:id="@+id/enableCamera"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="100dp"
             android:gravity="center"
             android:text="Open Camera" />
 
