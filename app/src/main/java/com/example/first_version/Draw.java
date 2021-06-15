@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.view.View;
 
-import androidx.camera.core.ImageAnalysis;
+
 
 
 public class Draw extends View {
@@ -37,6 +37,6 @@ public class Draw extends View {
         super.onDraw(canvas);
         canvas.drawText(text,rect.centerX(),rect.centerY(),textpaint);
         canvas.drawRect(rect.left,rect.top,rect.right,rect.bottom,paint);
-        //canvas.drawText(text,rect.left,rect.right,textpaint);
+
     }
 }

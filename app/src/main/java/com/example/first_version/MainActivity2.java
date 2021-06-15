@@ -142,6 +142,12 @@ public class MainActivity2 extends AppCompatActivity {
                     Draw element=new Draw(MainActivity2.this,rect,TextUtils.isEmpty(label)?"undefined":label);
 
                     binding.parent.addView(element);
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
                 Log.d("Test:","nextDetection");
 
@@ -154,46 +160,7 @@ public class MainActivity2 extends AppCompatActivity {
                 imageAnalysis, preview);
         Log.d("Test:","binde to life cycle");
     }
-   /* private void bindImageAnalysis(@org.jetbrains.annotations.NotNull ProcessCameraProvider cameraProvider) {
-        ImageAnalysis imageAnalysis =
-                new ImageAnalysis.Builder().setTargetResolution(new Size(1280, 720))
-                        .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST).build();
-        imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(this), new ImageAnalysis.Analyzer() {
-            @Override
-            public void analyze(@NonNull ImageProxy image) {
-                @SuppressLint("UnsafeOptInUsageError") Image mediaImage = image.getImage();
-                int rotation=image.getImageInfo().getRotationDegrees();
-                Bitmap bitmap=toBitmap(mediaImage);
-                bitmap=rotateBitmap(bitmap,rotation);
 
-                //imag=InputImage.fromMediaImage(mediaImage,image.getImageInfo().getRotationDegrees());
-
-
-                List<Detection> results = objectDetector.detect(TensorImage.fromBitmap(bitmap));
-                for(Detection res:results){
-                    RectF rect = res.getBoundingBox();
-                    String label=res.getCategories().get(0).getLabel();
-                    Log.d("Label:",label);
-                    Draw element=new Draw(this,rect,label);
-
-                    binding.parent.addView(element);
-                }
-                Log.d("Test:","nextDetection");
-
-
-
-                image.close();
-            }
-        });
-        Preview preview = new Preview.Builder().build();
-        Log.d("Test:","preview Use case");
-        CameraSelector cameraSelector = new CameraSelector.Builder()
-                .requireLensFacing(CameraSelector.LENS_FACING_BACK).build();
-        preview.setSurfaceProvider(previewview.getSurfaceProvider());
-        cameraProvider.bindToLifecycle((LifecycleOwner)this, cameraSelector,
-                imageAnalysis, preview);
-        Log.d("Test:","binde to life cycle");
-    }*/
     private static Bitmap toBitmap(Image image) {
         Image.Plane[] planes = image.getPlanes();
         ByteBuffer yBuffer = planes[0].getBuffer();
